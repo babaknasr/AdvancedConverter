@@ -98,7 +98,7 @@ class ConvertorClass(object):
 
     def check(self, value, unit1, unit2, extra):
         if unit1 == unit2:
-            self.convList[(self.u1, self.u2)] = {'factor':1, 'ignore': True}
+            self.convList[(unit1, unit2)] = {'factor':1, 'ignore': True}
         if not isinstance(extra, list):
             extra = [extra]
         return value, unit1, unit2, extra

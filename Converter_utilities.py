@@ -5,7 +5,7 @@ from collections import defaultdict
 # Constants
 K2C = 273.15 #C
 
-class ConvertorClass(object):
+class ConverterClass(object):
     '''
     Conversion Class
     '''

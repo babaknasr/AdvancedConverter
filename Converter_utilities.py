@@ -93,6 +93,7 @@ class ConverterClass(object):
         if self.convList.get((unit1, unit2)) is not None:
             converted_value = self._calc(value, unit1, unit2, extra)
         else:
+            print('Direct conversion is not available. check chain conversion method...')
             converted_value = self.sequence_calc(value, unit1, unit2, extra)
         return converted_value
 
@@ -123,6 +124,7 @@ class ConverterClass(object):
     def sequence_calc(self, val, unit1, unit2, extra=list()):
         exist1 = 0
         exist2 = 0
+        conv_val = None
         for t in self.convList.keys():
             if unit1 in t:
                 exist1 = 1
@@ -138,7 +140,7 @@ class ConverterClass(object):
                 for t in seq:
                     conv_val = self._calc(conv_val, t[0], t[1], extra)
         else:
-            conv_val = None
+            print('Error: Conversion "{}"->"{}" not available.'.format(unit1, unit2))
         return conv_val
 
     def connected_graph(self, edges):
@@ -163,7 +165,7 @@ class ConverterClass(object):
             return new_path
 
         explored = []
-        SP = None
+        SP = []
         # queue for traversing the graph in the BFS
         queue = [[start]]
         # Loop to traverse the graph using queue

@@ -139,6 +139,8 @@ class ConverterClass(object):
                 conv_val = val
                 for t in seq:
                     conv_val = self._calc(conv_val, t[0], t[1], extra)
+            else:
+                print('Error: Chain conversion "{}"->"{}" not available.'.format(unit1, unit2))
         else:
             print('Error: Conversion "{}"->"{}" not available.'.format(unit1, unit2))
         return conv_val

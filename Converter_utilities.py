@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import math
 from collections import defaultdict
 
@@ -112,7 +113,8 @@ class ConverterClass(object):
         if self.convList[(unit1, unit2)].get('func'): # incase custom function is defined
             conv_val = self.convList[(unit1, unit2)]['func'](np.array(val), extra)
         else:   # in case of factor, addon
-            conv_val = np.array(val)*self.convList[(unit1, unit2)]['factor'] + self.convList[(unit1, unit2)].get('add', 0)
+            _val = pd.to_numeric(np.array(val), errors='coerce') # Ignore error if there is non numeric items (convert them to np.nan)
+            conv_val = _val*self.convList[(unit1, unit2)]['factor'] + self.convList[(unit1, unit2)].get('add', 0)
         # Check the value is 0-dim np.array for single value return or more for list value return
         if conv_val.ndim == 0:  # 0-dimension numpy array
             conv_val = float(conv_val)
